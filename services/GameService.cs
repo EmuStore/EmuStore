@@ -9,14 +9,16 @@ using EmuStore.Models;
 
 namespace EmuStore.Services
 {
-    public class GameService
+    public partial class GameService
     {
         public async Task<List<Game>> GetAllGames(string token)
         {
             try
             {
                 HttpClient client = UtilityService.GetHttpClient(token);
-                HttpResponseMessage response = await client.GetAsync("/game/list");
+                var response = await client.GetAsync("/game/scan");
+                response.EnsureSuccessStatusCode();
+                response = await client.GetAsync("/game/list");
                 response.EnsureSuccessStatusCode();
                 string respStr = await response.Content.ReadAsStringAsync();
                 List<Game> games = UtilityService.DeserializeJson<List<Game>>(respStr);

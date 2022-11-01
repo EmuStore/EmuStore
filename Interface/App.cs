@@ -3,7 +3,7 @@ using Godot;
 using EmuStore.Models;
 using EmuStore.Services;
 
-public partial class root : Control
+public partial class App : Control
 {
     private LineEdit tokenInput;
     private OptionButton gameSelect;
@@ -37,9 +37,12 @@ public partial class root : Control
     {
         GD.Print("Downloading...");
         Game game = games.Find((item) => item.Id == gameSelect.GetSelectedId());
-        GameService gameService = new GameService();
-        GD.Print(game.Name);
-        GD.Print(game.Platform);
-        gameService.DownloadGame(game, tokenInput.Text);
+        if (game is Game)
+        {
+            GameService gameService = new GameService();
+            GD.Print(game.Name);
+            GD.Print(game.Platform);
+            gameService.DownloadGame(game, tokenInput.Text);
+        }
     }
 }

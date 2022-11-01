@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace EmuStore.Models
 {
-    public class Game
+    public partial class Game
     {
         [JsonProperty("id")]
         public int Id { get; set; }

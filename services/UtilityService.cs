@@ -1,5 +1,6 @@
 using System.Net.Http.Headers;
 using System.Net.Http;
+using System;
 using Newtonsoft.Json;
 
 namespace EmuStore.Services
@@ -17,7 +18,7 @@ namespace EmuStore.Services
                 "Bearer",
                 token
             );
-            client.BaseAddress = new System.Uri("http://localhost:3080");
+            client.BaseAddress = new Uri("http://localhost:3080");
             return client;
         }
 
